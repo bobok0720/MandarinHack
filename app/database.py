@@ -5,6 +5,7 @@ import os
 from typing import Generator
 
 from sqlalchemy import create_engine
+from sqlalchemy.engine.url import make_url
 from sqlalchemy.orm import sessionmaker
 
 from .models import Base
@@ -14,7 +15,11 @@ SUPABASE_DB_URL = os.getenv("SUPABASE_DB_URL")
 if not SUPABASE_DB_URL:
     raise RuntimeError("SUPABASE_DB_URL environment variable is required")
 
-engine = create_engine(SUPABASE_DB_URL, future=True)
+url = make_url(SUPABASE_DB_URL)
+if "sslmode" not in url.query:
+    url = url.set(query={**url.query, "sslmode": "require"})
+
+engine = create_engine(url, future=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, future=True)
 
 

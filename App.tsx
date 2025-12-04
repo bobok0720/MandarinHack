@@ -179,10 +179,11 @@ const App: React.FC = () => {
             </div>
 
             {sessionQueue[currentCardIndex] && (
-                <Flashcard 
-                    key={`${sessionQueue[currentCardIndex].id}-${currentCardIndex}`} 
-                    card={sessionQueue[currentCardIndex]} 
-                    onGrade={handleGradeCard} 
+                <Flashcard
+                    key={`${sessionQueue[currentCardIndex].id}-${currentCardIndex}`}
+                    card={sessionQueue[currentCardIndex]}
+                    allCards={cards}
+                    onGrade={handleGradeCard}
                 />
             )}
           </div>

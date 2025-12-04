@@ -9,6 +9,17 @@ interface FlashcardProps {
   onGrade: (card: VocabCard, grade: SRSGrade) => void;
 }
 
+const shuffleArray = <T,>(items: T[]): T[] => {
+  const array = [...items];
+
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+};
+
 export const Flashcard: React.FC<FlashcardProps> = ({ card, allCards, onGrade }) => {
   const [selectedOption, setSelectedOption] = useState('');
   const [status, setStatus] = useState<'idle' | 'result'>('idle');
@@ -24,7 +35,7 @@ export const Flashcard: React.FC<FlashcardProps> = ({ card, allCards, onGrade })
 
     const combined = Array.from(new Set([...distractors, card.definition]));
 
-    return combined.sort(() => 0.5 - Math.random());
+    return shuffleArray(combined);
   }, [allCards, card]);
 
   useEffect(() => {

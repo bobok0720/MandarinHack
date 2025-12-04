@@ -97,9 +97,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
             </div>
             <h3 className="text-sm font-semibold text-slate-500 uppercase">Mastery</h3>
           </div>
-          <p className="text-3xl font-bold text-slate-800">
-            {cards.filter(c => c.interval > 21).length} <span className="text-sm font-normal text-slate-400">words > 3 weeks</span>
-          </p>
+            <p className="text-3xl font-bold text-slate-800">
+              {cards.filter(c => c.interval > 21).length}{' '}
+              <span className="text-sm font-normal text-slate-400">words &gt; 3 weeks</span>
+            </p>
         </div>
 
         <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
